@@ -3,9 +3,9 @@ require_relative 'sql_object'
 
 module Searchable
   def where(params)
-    where = params.keys.map { |val| "#{val} = ?" }
-      .join(' AND ')
-    values = params.keys.map { |key| params[key] }
+    where = gen_where_line(params)
+    values = gen_values(params)
+
     datum = DBConnection.execute(<<-SQL, *values)
     SELECT
       *
@@ -14,7 +14,19 @@ module Searchable
     WHERE
       #{where}
     SQL
+
     parse_all(datum)
+  end
+
+  private
+
+  def gen_values(params)
+    params.keys.map { |key| params[key] }
+  end
+
+  def gen_where_line(params)
+    where_array = params.keys.map { |val| "#{val} = ?" }
+    where_array.join(' AND ')
   end
 end
 
