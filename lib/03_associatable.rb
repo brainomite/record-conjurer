@@ -44,9 +44,9 @@ module Associatable
     # ...
     # debugger
     options = BelongsToOptions.new(name.to_s, options)
+    assoc_options[name.to_sym] = options
     define_method(name) do
       val = send(options.foreign_key)
-      # debugger
       options.model_class.where(options.primary_key => val).first
     end
   end
@@ -56,13 +56,12 @@ module Associatable
     options = HasManyOptions.new(name.to_s, self.name, options)
     define_method(name) do
       val = send(options.primary_key)
-      # debugger
       options.model_class.where(options.foreign_key => val)
     end
   end
 
   def assoc_options
-    # Wait to implement this in Phase IVa. Modify `belongs_to`, too.
+    @assoc_options_hash ||= {}
   end
 end
 
