@@ -1,13 +1,8 @@
 require_relative '03_associatable'
 
-# Phase IV
 module Associatable
-  # Remember to go back to 04_associatable to write ::assoc_options
-
   def has_one_through(name, through_name, source_name)
-    # ...
     define_method(name) do
-      # debugger
       through_options = self.class.assoc_options[through_name]
 
       through_table_name = through_options.table_name
@@ -19,7 +14,6 @@ module Associatable
 
       source_table_name = source_options.table_name
       source_for_key = source_options.foreign_key
-      # debugger
 
       key = self.send(through_for_key)
       results = DBConnection.execute(<<-SQL, key)

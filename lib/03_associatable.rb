@@ -1,9 +1,6 @@
 require_relative '02_searchable'
 require 'active_support/inflector'
-require 'byebug'
 
-
-# Phase IIIa
 class AssocOptions
   attr_accessor(
     :foreign_key,
@@ -18,8 +15,6 @@ class AssocOptions
   def table_name
     model_class.table_name
   end
-
-
 end
 
 class BelongsToOptions < AssocOptions
@@ -39,10 +34,7 @@ class HasManyOptions < AssocOptions
 end
 
 module Associatable
-  # Phase IIIb
   def belongs_to(name, options = {})
-    # ...
-    # debugger
     options = BelongsToOptions.new(name.to_s, options)
     assoc_options[name.to_sym] = options
     define_method(name) do
@@ -52,7 +44,6 @@ module Associatable
   end
 
   def has_many(name, options = {})
-    # ...
     options = HasManyOptions.new(name.to_s, self.name, options)
     define_method(name) do
       val = send(options.primary_key)
@@ -67,5 +58,4 @@ end
 
 class SQLObject
   extend Associatable
-  # extend Searchable
 end
