@@ -10,12 +10,12 @@ module Associatable
       through_for_key = through_options.foreign_key
 
       source_options = through_options.model_class
-                        .assoc_options[source_name]
+                                      .assoc_options[source_name]
 
       source_table_name = source_options.table_name
       source_for_key = source_options.foreign_key
 
-      key = self.send(through_for_key)
+      key = send(through_for_key)
       results = DBConnection.execute(<<-SQL, key)
         SELECT
           #{source_table_name}.*
