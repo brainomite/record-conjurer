@@ -1,5 +1,4 @@
 require_relative 'db_connection'
-require_relative 'sql_object'
 
 module Searchable
   def where(params)
@@ -28,8 +27,4 @@ module Searchable
     where_array = params.keys.map { |val| "#{val} = ?" }
     where_array.join(' AND ')
   end
-end
-
-class SQLObject
-  extend Searchable
 end

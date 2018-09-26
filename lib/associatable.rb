@@ -1,38 +1,5 @@
-require_relative 'searchable'
-require 'active_support/inflector'
-
-class AssocOptions
-  attr_accessor(
-    :foreign_key,
-    :class_name,
-    :primary_key
-  )
-
-  def model_class
-    class_name.constantize
-  end
-
-  def table_name
-    model_class.table_name
-  end
-end
-
-class BelongsToOptions < AssocOptions
-  def initialize(name, options = {})
-    @foreign_key = options[:foreign_key] || "#{name.downcase}_id".to_sym
-    @class_name = options[:class_name] || name.camelcase
-    @primary_key = options[:primary_key] || :id
-  end
-end
-
-class HasManyOptions < AssocOptions
-  def initialize(name, self_class_name, options = {})
-    @foreign_key = options[:foreign_key] ||
-                   "#{self_class_name.downcase}_id".to_sym
-    @class_name = options[:class_name] || name.camelcase.singularize
-    @primary_key = options[:primary_key] || :id
-  end
-end
+require_relative 'belongs_to_options'
+require_relative 'has_many_options'
 
 module Associatable
   def belongs_to(name, options = {})
@@ -55,8 +22,36 @@ module Associatable
   def assoc_options
     @assoc_options_hash ||= {}
   end
-end
 
-class SQLObject
-  extend Associatable
+  def has_one_through(name, through_name, source_name)
+    define_method(name) do
+      through_options = self.class.assoc_options[through_name]
+
+      through_table_name = through_options.table_name
+      through_pri_key = through_options.primary_key
+      through_for_key = through_options.foreign_key
+
+      source_options = through_options.model_class
+                                      .assoc_options[source_name]
+
+      source_table_name = source_options.table_name
+      source_for_key = source_options.foreign_key
+
+      key = send(through_for_key)
+      results = DBConnection.execute(<<-SQL, key)
+        SELECT
+          #{source_table_name}.*
+        FROM
+          #{source_table_name}
+        JOIN
+          #{through_table_name}
+        ON
+          #{source_table_name}.#{through_pri_key} =
+          #{through_table_name}.#{source_for_key}
+        WHERE
+          #{through_table_name}.#{through_pri_key} = ?
+      SQL
+      source_options.model_class.parse_all(results).first
+    end
+  end
 end
