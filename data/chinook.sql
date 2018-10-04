@@ -2,10 +2,10 @@ PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "Albums"
 (
-    [AlbumId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Title] NVARCHAR(160)  NOT NULL,
     [ArtistId] INTEGER  NOT NULL,
-    FOREIGN KEY ([ArtistId]) REFERENCES [Artists] ([ArtistId])
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artists] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 INSERT INTO Albums VALUES(1,'For Those About To Rock We Salute You',1);
@@ -357,7 +357,7 @@ INSERT INTO Albums VALUES(346,'Mozart: Chamber Music',274);
 INSERT INTO Albums VALUES(347,'Koyaanisqatsi (Soundtrack from the Motion Picture)',275);
 CREATE TABLE IF NOT EXISTS "Artists"
 (
-    [ArtistId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Name] NVARCHAR(120)
 );
 INSERT INTO Artists VALUES(1,'AC/DC');
@@ -637,7 +637,7 @@ INSERT INTO Artists VALUES(274,'Nash Ensemble');
 INSERT INTO Artists VALUES(275,'Philip Glass Ensemble');
 CREATE TABLE IF NOT EXISTS "Genres"
 (
-    [GenreId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Name] NVARCHAR(120)
 );
 INSERT INTO Genres VALUES(1,'Rock');
@@ -667,7 +667,7 @@ INSERT INTO Genres VALUES(24,'Classical');
 INSERT INTO Genres VALUES(25,'Opera');
 CREATE TABLE IF NOT EXISTS "media_types"
 (
-    [MediaTypeId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Name] NVARCHAR(120)
 );
 INSERT INTO media_types VALUES(1,'MPEG audio file');
@@ -677,7 +677,7 @@ INSERT INTO media_types VALUES(4,'Purchased AAC audio file');
 INSERT INTO media_types VALUES(5,'AAC audio file');
 CREATE TABLE IF NOT EXISTS "Playlists"
 (
-    [PlaylistId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Name] NVARCHAR(120)
 );
 INSERT INTO Playlists VALUES(1,'Music');
@@ -703,9 +703,9 @@ CREATE TABLE IF NOT EXISTS "playlist_tracks"
     [PlaylistId] INTEGER  NOT NULL,
     [TrackId] INTEGER  NOT NULL,
     CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
-    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlists] ([PlaylistId])
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlists] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY ([TrackId]) REFERENCES [Tracks] ([TrackId])
+    FOREIGN KEY ([TrackId]) REFERENCES [Tracks] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 INSERT INTO playlist_tracks VALUES(1,3402);
@@ -9425,7 +9425,7 @@ INSERT INTO playlist_tracks VALUES(17,3290);
 INSERT INTO playlist_tracks VALUES(18,597);
 CREATE TABLE IF NOT EXISTS "Tracks"
 (
-    [TrackId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     [Name] NVARCHAR(200)  NOT NULL,
     [AlbumId] INTEGER,
     [MediaTypeId] INTEGER  NOT NULL,
@@ -9434,11 +9434,11 @@ CREATE TABLE IF NOT EXISTS "Tracks"
     [Milliseconds] INTEGER  NOT NULL,
     [Bytes] INTEGER,
     [UnitPrice] NUMERIC(10,2)  NOT NULL,
-    FOREIGN KEY ([AlbumId]) REFERENCES [Albums] ([AlbumId])
+    FOREIGN KEY ([AlbumId]) REFERENCES [Albums] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY ([GenreId]) REFERENCES [Genres] ([GenreId])
+    FOREIGN KEY ([GenreId]) REFERENCES [Genres] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY ([MediaTypeId]) REFERENCES [media_types] ([MediaTypeId])
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [media_types] ([id])
 		ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 INSERT INTO Tracks VALUES(1,'For Those About To Rock (We Salute You)',1,1,1,'Angus Young, Malcolm Young, Brian Johnson',343719,11170334,0.98999999999999999111);
@@ -12951,13 +12951,13 @@ INSERT INTO sqlite_sequence VALUES('Artists',275);
 INSERT INTO sqlite_sequence VALUES('Albums',347);
 INSERT INTO sqlite_sequence VALUES('Tracks',3503);
 INSERT INTO sqlite_sequence VALUES('Playlists',18);
-CREATE UNIQUE INDEX [IPK_Album] ON "Albums"([AlbumId]);
-CREATE UNIQUE INDEX [IPK_Artist] ON "Artists"([ArtistId]);
-CREATE UNIQUE INDEX [IPK_Genre] ON "Genres"([GenreId]);
-CREATE UNIQUE INDEX [IPK_MediaType] ON "media_types"([MediaTypeId]);
-CREATE UNIQUE INDEX [IPK_Playlist] ON "Playlists"([PlaylistId]);
+CREATE UNIQUE INDEX [IPK_Album] ON "Albums"([id]);
+CREATE UNIQUE INDEX [IPK_Artist] ON "Artists"([id]);
+CREATE UNIQUE INDEX [IPK_Genre] ON "Genres"([id]);
+CREATE UNIQUE INDEX [IPK_MediaType] ON "media_types"([id]);
+CREATE UNIQUE INDEX [IPK_Playlist] ON "Playlists"([id]);
 CREATE UNIQUE INDEX [IPK_PlaylistTrack] ON "playlist_tracks"([PlaylistId], [TrackId]);
-CREATE UNIQUE INDEX [IPK_Track] ON "Tracks"([TrackId]);
+CREATE UNIQUE INDEX [IPK_Track] ON "Tracks"([id]);
 CREATE INDEX [IFK_AlbumArtistId] ON "Albums" ([ArtistId]);
 CREATE INDEX [IFK_PlaylistTrackTrackId] ON "playlist_tracks" ([TrackId]);
 CREATE INDEX [IFK_TrackAlbumId] ON "Tracks" ([AlbumId]);

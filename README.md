@@ -33,44 +33,44 @@ All classes inherit from RecordConjurer
 ### `Albums`
 | column name       | data type     | details                   |
 |:------------------|:-------------:|:--------------------------|
-| `AlbumId`         | integer       | not null, primary key     |
+| `id`              | integer       | not null, primary key     |
 | `Title`           | nvarchar(160) | not null, indexed, unique |
 | `ArtistId`        | integer       | not null, foreign key     |
 
 ### `Artists`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
-| `ArtistId`        | integer       | not null, primary key          |
+| `id`              | integer       | not null, primary key          |
 | `Name`            | nvarchar(120) | not null, indexed, unique      |
 
 ### `Genres`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
-| `GenreId`         | integer       | not null, primary key          |
+| `id`              | integer       | not null, primary key          |
 | `Name`            | nvarchar(120) | not null, indexed, unique      |
 
 ### `media_types`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
-| `MediaTypeId`     | integer       | not null, primary key          |
+| `id`              | integer       | not null, primary key          |
 | `Name`            | nvarchar(120) | not null, indexed, unique      |
 
 ### `Playlists`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
-| `PlaylistId`      | integer       | not null, primary key          |
+| `id`              | integer       | not null, primary key          |
 | `Name`            | nvarchar(120) | not null, indexed, unique      |
 
 ### `playlist_tracks`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
-| `PlaylistId`      | integer       | not null, foreign key          |
+| `id`              | integer       | not null, foreign key          |
 | `TrackId`         | integer       | not null, foreign key          |
 
 ### `Tracks`
 | column name       | data type     | details                             |
 |:------------------|:-------------:|:------------------------------------|
-| `TrackId`         | integer       | not null, primary key               |
+| `id`              | integer       | not null, primary key               |
 | `name`            | nvarchar(200) | not null, indexed, unique           |
 | `AlbumId`         | integer       | foreign key                         |
 | `MediaTypeId`     | integer       | not null, foreign key               |
