@@ -1,2 +1,1 @@
-load 'record_conjurer.rb'
-DBConnection.reset
+load 'demo.rb'
