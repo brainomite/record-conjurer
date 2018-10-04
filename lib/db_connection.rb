@@ -2,9 +2,9 @@ require 'sqlite3'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
-ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-ACS_SQL_FILE = File.join(ROOT_FOLDER, 'acs-1-year-2015.sql')
-ACS_DB_FILE = File.join(ROOT_FOLDER, 'acs-1-year-2015.db.sqlite')
+DATA_FOLDER = File.join(File.dirname(__FILE__), '..', 'data')
+CHINOOK_SQL_FILE = File.join(DATA_FOLDER, 'chinook.sql')
+CHINOOK_DB_FILE = File.join(DATA_FOLDER, 'chinook.db.sqlite')
 
 class DBConnection
   def self.open(db_file_name)
@@ -17,12 +17,12 @@ class DBConnection
 
   def self.reset
     commands = [
-      "rm '#{ACS_DB_FILE}'",
-      "cat '#{ACS_SQL_FILE}' | sqlite3 '#{ACS_DB_FILE}'"
+      "rm '#{CHINOOK_DB_FILE}'",
+      "cat '#{CHINOOK_SQL_FILE}' | sqlite3 '#{CHINOOK_DB_FILE}'"
     ]
 
     commands.each { |command| `#{command}` }
-    DBConnection.open(ACS_DB_FILE)
+    DBConnection.open(CHINOOK_DB_FILE)
   end
 
   def self.instance
