@@ -8,6 +8,25 @@ Record-Conjurer is an object-relational mapper inspired by Ruby on Rails' Active
 3. Run `bundle exec pry` in the root directory
 4. Have fun poking about!
 
+## Usage
+*class represents a class, class_instance represents and instance of the class*
+
+All classes inherit from RecordConjurer
+- class.all returns all of the records in the associated table
+- class.table_name returns the name of the table use in the db
+- class_instance.attributes returns a hash with field:value pairs
+- class_instance.attribute_values returns an array of all the values
+
+## Demo Classes
+*These are setup in demo.rb and autoloaded via .pryrc when pry is ran*
+- `Albums`
+- `Artists`
+- `Generes`
+- `MediaTypes`
+- `Playlists`
+- `PlaylistTracks`
+- `Tracks`
+
 ## Sample Database Schema
 *Database is a subset of the [chinook database](https://github.com/lerocha/chinook-database)*
 
