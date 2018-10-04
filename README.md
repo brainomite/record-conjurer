@@ -88,4 +88,6 @@ All classes inherit from RecordConjurer
 
 ## Future Implementations
 Forthcoming features include:
-+ Updates to this README.md file
++ The ability to select specific fields vs *
++ The ability to include relations to prevent n+1 queries
++ The ability to see the generated SQL statements
