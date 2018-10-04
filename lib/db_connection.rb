@@ -4,7 +4,7 @@ PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
 ACS_SQL_FILE = File.join(ROOT_FOLDER, 'acs-1-year-2015.sql')
-ACS_DB_FILE = File.join(ROOT_FOLDER, 'acs-1-year-2015.db')
+ACS_DB_FILE = File.join(ROOT_FOLDER, 'acs-1-year-2015.db.sqlite')
 
 class DBConnection
   def self.open(db_file_name)
