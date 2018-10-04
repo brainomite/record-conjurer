@@ -17,9 +17,12 @@ class DBConnection
 
   def self.reset
     commands = [
-      "rm '#{CHINOOK_DB_FILE}'",
       "cat '#{CHINOOK_SQL_FILE}' | sqlite3 '#{CHINOOK_DB_FILE}'"
     ]
+
+    if File.file?(CHINOOK_DB_FILE)
+      commands.unshift("rm '#{CHINOOK_DB_FILE}'")
+    end
 
     commands.each { |command| `#{command}` }
     DBConnection.open(CHINOOK_DB_FILE)
