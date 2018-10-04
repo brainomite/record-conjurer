@@ -1,9 +1,9 @@
-require_relative 'db_connection'
-require_relative 'searchable'
-require_relative 'associatable'
+require_relative './lib/db_connection'
+require_relative './lib/searchable'
+require_relative './lib/associatable'
 require 'active_support/inflector'
 
-class SQLObject
+class RecordConjurer
   extend Searchable
   extend Associatable
   def initialize(params = {})
