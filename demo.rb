@@ -53,6 +53,7 @@ class Track < RecordConjurer
   belongs_to :album,
     primary_key: :id,
     foreign_key: :AlbumId
+  has_one_through :artist, :album, :artist
   belongs_to :genre,
     primary_key: :id,
     foreign_key: :GenreId
