@@ -9,19 +9,17 @@ Record-Conjurer is an object-relational mapper inspired by Ruby on Rails' Active
 4. Have fun poking about!
 
 ## Usage
-*`class` represents a class, `class_instance` represents an instance of the class, `field_name` represent a field*
-
-All classes inherit from RecordConjurer
-- `class.all` returns all of the records in the associated table as an array
-- `class.table_name` returns the name of the table use in the db
-- `class.new(field_hash)` will create a new instance and will set fields to value provided in the optional hash
-- `class_instance.save` will add a new record to the db with the values provided. Returns the new id.
-- `class_instance.find(id)` returns a record with that id, or nil if not found
-- `class_instance.field_name` returns the value of the field for that record
-- `class_instance.field_name=` sets the value of the field for that record
-- `class_instance.update` saves that changes made to a record
-- `class_instance.attributes` returns a hash with field:value pairs
-- `class_instance.attribute_values` returns an array of all the values
+All classes inherit from RecordConjurer, thus will have the following interfaces
+- `::all` returns all of the records in the associated table as an array
+- `::table_name` returns the name of the table use in the db
+- `::new(field_hash)` will create a new instance and will set fields to value provided in the optional hash
+- `#save` will add a new record to the db with the values provided. Returns the new id.
+- `#find(id)` returns a record with that id, or nil if not found
+- `#field_name` returns the value of the field for that record
+- `#field_name=` sets the value of the field for that record
+- `#update` saves that changes made to a record
+- `#attributes` returns a hash with field:value pairs
+- `#attribute_values` returns an array of all the values
 
 ## Demo Classes
 *These are set up in demo.rb and autoloaded via .pryrc when pry is ran*
