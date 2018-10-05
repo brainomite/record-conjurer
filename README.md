@@ -13,8 +13,8 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 - `::all` returns all of the records in the associated table as an array
 - `::table_name` returns the name of the table use in the db
 - `::new(field_hash)` will create a new instance and will set fields to value provided in the optional hash
+- `::find(id)` returns a record with that id, or nil if not found
 - `#save` will add a new record to the db with the values provided. Returns the new id.
-- `#find(id)` returns a record with that id, or nil if not found
 - `#field_name` returns the value of the field for that record
 - `#field_name=` sets the value of the field for that record
 - `#update` saves that changes made to a record
