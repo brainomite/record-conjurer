@@ -52,6 +52,12 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
                                         #    :Bytes=>8679940,
                                         #    :UnitPrice=>0.99}>
   song.artist #=> #<Artist:0x007fcbc02c7f98 @attributes={:id=>3, :Name=>"Aerosmith"}>
+  aerosmith.Name = 'not aerosmith' #=> "not aerosmith"
+  aerosmith.update #=> 0
+  Artist.find(3) #=> #<Artist:0x007f921bbae2d0 @attributes={:id=>3, :Name=>"not aerosmith"}>
+  new_artist = Artist.new(Name: 'Sonic') #=> #<Artist:0x007f921bb3d5d0 @attributes={:Name=>"Sonic"}>
+  new_artist.save #=> 276
+  Artist.all.last #=> #<Artist:0x007f921b94f840 @attributes={:id=>276, :Name=>"Sonic"}>
 ```
 
 ## Demo Classes
