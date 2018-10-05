@@ -21,6 +21,31 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 - `#attributes` returns a hash with field:value pairs
 - `#attribute_values` returns an array of all the values
 
+## Things to try
+
+```ruby
+  Artist.all #=> Array of artists
+  Track.all #=> Array of tracks
+  accept_band = Artist.find(2) #=> #<Artist:0x007fcbc01d7e80 @attributes={:id=>2, :Name=>"Accept"}>
+  accept_band.albums #=> Array of albums belonging to accept_band
+  aerosmith = Artist.where(name: "Aerosmith").first #=> #<Artist:0x007fcbbfaa5c20 @attributes={:id=>3, :Name=>"Aerosmith"}>
+  aerosmith_album = aerosmith.albums.first #=> #<Album:0x007fcbc11a5768 @attributes={:id=>5, :Title=>"Big Ones", :ArtistId=>3}>
+  aerosmith_album.tracks #=> Array of tracks
+  song_where = {name: "Dude (Looks Like A Lady)"}
+  song = Track.where(song_where).first  #=> #<Track:0x007fcbc144b210
+                                        #  @attributes=
+                                        #   {:id=>27,
+                                        #    :Name=>"Dude (Looks Like A Lady)",
+                                        #    :AlbumId=>5,
+                                        #    :MediaTypeId=>1,
+                                        #    :GenreId=>1,
+                                        #    :Composer=>"Steven Tyler, Joe Perry, Desmond Child",
+                                        #    :Milliseconds=>264855,
+                                        #    :Bytes=>8679940,
+                                        #    :UnitPrice=>0.99}>
+  song.artist #=> #<Artist:0x007fcbc02c7f98 @attributes={:id=>3, :Name=>"Aerosmith"}>
+```
+
 ## Demo Classes
 *These are set up in demo.rb and autoloaded via .pryrc when pry is ran*
 - `Albums`
