@@ -38,8 +38,11 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 | column name       | data type     | details                   |
 |:------------------|:-------------:|:--------------------------|
 | `id`              | integer       | not null, primary key     |
-| `Title`           | nvarchar(160) | not null, indexed, unique |
+| `Title`           | nvarchar(160) | not null                  |
 | `ArtistId`        | integer       | not null, foreign key     |
+
++ index on `ArtistId`
++ `ArtistID` references `Artists`
 
 ### `Artists`
 | column name       | data type     | details                        |
@@ -51,25 +54,30 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
 | `id`              | integer       | not null, primary key          |
-| `Name`            | nvarchar(120) | not null, indexed, unique      |
+| `Name`            | nvarchar(120) |                                |
+
 
 ### `media_types`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
 | `id`              | integer       | not null, primary key          |
-| `Name`            | nvarchar(120) | not null, indexed, unique      |
+| `Name`            | nvarchar(120) |                                |
 
 ### `Playlists`
 | column name       | data type     | details                        |
 |:------------------|:-------------:|:-------------------------------|
 | `id`              | integer       | not null, primary key          |
-| `Name`            | nvarchar(120) | not null, indexed, unique      |
+| `Name`            | nvarchar(120) |                                |
 
 ### `playlist_tracks`
-| column name       | data type     | details                        |
-|:------------------|:-------------:|:-------------------------------|
-| `id`              | integer       | not null, foreign key          |
-| `TrackId`         | integer       | not null, foreign key          |
+| column name       | data type     | details                            |
+|:------------------|:-------------:|:-----------------------------------|
+| `PlayListId`      | integer       | not null, foreign key, primary key |
+| `TrackId`         | integer       | not null, foreign key              |
+
++ index on `[:PlayListId, :TrackId], unique: true`
++ `PlayListId` references `Playlists`
++ `TrackId` references `Tracks`
 
 ### `Tracks`
 | column name       | data type     | details                             |
@@ -83,6 +91,10 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 | `Milliseconds`    | integer       | not null                            |
 | `Bytes`           | integer       |                                     |
 | `UnitPrice`       | numeric(10,2) | not null                            |
+
++ `AlbumId` references `Albums`
++ `MediaTypeId` references `MediaTypes`
++ `GenreId` references `Genres`
 
 ## Future Implementations
 Forthcoming features include:
