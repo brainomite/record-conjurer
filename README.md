@@ -88,4 +88,5 @@ All classes inherit from RecordConjurer, thus will have the following interfaces
 Forthcoming features include:
 + The ability to select specific fields vs *
 + The ability to include relations to prevent n+1 queries
++ The abiltity to represetn `has_many_through` relations
 + The ability to see the generated SQL statements
