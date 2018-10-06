@@ -3,12 +3,12 @@
 Record-Conjurer is an object-relational mapper inspired by Ruby on Rails' Active Record. This ORM allows Ruby classes to connect to SQLite3 relational database tables. A sample database is provided for experimentation in Pry.
 
 ## Table of contents
-- [Setup](https://github.com/brainomite/record-conjurer#setup-for-sample-db)
-- [Usage](https://github.com/brainomite/record-conjurer#usage)
-- [Things to Try](https://github.com/brainomite/record-conjurer#things-to-try)
-- [Demo Classes](https://github.com/brainomite/record-conjurer#demo-classes)
-- [Sample Database Schema](https://github.com/brainomite/record-conjurer#sample-database-schema)
-- [Future Implementations](https://github.com/brainomite/record-conjurer#future-implementations)
+- [Setup](#setup-for-sample-db)
+- [Usage](#usage)
+- [Things to Try](#things-to-try)
+- [Demo Classes](#demo-classes)
+- [Sample Database Schema](#sample-database-schema)
+- [Future Implementations](#future-implementations)
 
 ## Setup (for sample DB)
 1. Clone the repo
